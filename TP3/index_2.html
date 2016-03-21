@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Events </title>
+    </head>
+    <body>
+
+	<canvas id="canvas" height=1000 width=1000></canvas>
+
+    </body>
+<script>
+var img = new Image();
+
+var mainloop = function() {
+	userEvent();
+	updateGame();
+	drawGame();
+};
+
+var horizontal = 0;
+var vertical = 0;
+var y = 256;
+var x = 128;
+var direction = Array();
+var cpt = 0; //Compte le nombre de tour de boucle
+
+var userEvent = function() {
+	window.addEventListener("keydown", function (event) {
+	if (event.defaultPrevented) {
+		return; // Should do nothing if the key event was already consumed.
+	}
+
+	switch (event.key) {
+		case "ArrowDown":
+	      // Do something for "down arrow" key press.
+			vertical += 1;
+			direction.push("down");
+			break;
+		case "ArrowUp":
+	      // Do something for "up arrow" key press.
+			vertical -= 1;
+			direction.push("up");
+			break;
+		case "ArrowLeft":
+	      // Do something for "left arrow" key press.
+			horizontal -=1;
+			direction.push("left");
+			break;
+		case "ArrowRight":
+	      // Do something for "right arrow" key press.
+			horizontal += 1;
+			direction.push("right");
+			break;
+		case "Enter":
+	      // Do something for "enter" or "return" key press.
+			break;
+		case "Escape":
+	      // Do something for "esc" key press.
+			break;
+		default:
+			return; // Quit when this doesn't handle the key event.
+	  }
+
+	  // Consume the event for suppressing "double action".
+	  event.preventDefault();
+	}, true);
+}
+var i = 0;
+var updateGame = function() {
+		switch (direction.pop()){
+			case "down":
+				y = 256;
+				break;
+			case "up":
+				y = 384;
+				break;
+			case "left":
+				y = 0;
+				break;
+			case "right":
+				y = 128;
+				break;
+			default:
+		}
+		if(cpt%10===0){
+			x = (x+1)%4;
+		}
+}
+
+var drawGame = function() {
+	
+	var ctx = document.getElementById('canvas').getContext('2d');
+	img.onload = function() {
+			//On efface le canvas
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			//On affiche la ieme partie du sprite pour l'animation
+			ctx.drawImage(img,x*128,y,128,128,0,0,128,128);
+	};
+	img.src = 'hero_walk_cycle_spritesheet_by_mrnoobtastic-d3defej.png';
+}
+
+var animFrame = window.requestAnimationFrame ||
+	window.webkitRequestAnimationFrame ||
+	window.mozRequestAnimationFrame    ||
+	window.oRequestAnimationFrame      ||
+	window.msRequestAnimationFrame     ||
+	null ;
+
+var recursiveAnim = function() {
+	cpt++;
+	mainloop();
+	animFrame(recursiveAnim);
+};
+// start the mainloop
+animFrame( recursiveAnim );
+
+    </script>
