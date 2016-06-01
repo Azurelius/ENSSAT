@@ -1,0 +1,23 @@
+============
+Scénario RPG
+============
+
+---- Le héros ----
+Troubadour voyageant de village en village, sa vie se trouve changée lorsqu'il rencontre la jeune sorcière. Il se fait alors transformer en (chat).
+
+---- Prologue ----
+Sur la route du village de départ, notre héros fait la rencontre de la jeune sorcière qui combat un animal. Voulant lui venir en aide, et pensant qu'elle est en difficulté, il achève l'animal. La sorcière, mécontente car il a tué l'animal dont elle voulait faire son familier, le transforme en chat à l'aide d'un sort. Elle se rend compte ensuite de sa bétise, et veut s'excuser, mais explique au troubadour qu'il n'existe aucun sort curatif. Elle propose donc au héros de l'accompagner afin de retrouver un objet qui lui permettra de retrouver sa forme originelle.
+
+---- Chapitre 1 : En route pour la ville ----
+
+La sorcière ayant juste entendu des légendes sur l'objet en question, propose de se rendre à la bibliothèque de la ville principale afin de trouver des informations sur l'objet en question.
+Là-bas, ils arrivent à trouver où se trouve l'objet qu'ils recherchent. 
+
+---- Chapitre 2 : Direction la grotte / tour / donjon ----
+
+Les personnages se rendent à la grotte / tour / donjon. Ils sont bloqués à l'entrée par une statue enchantée. Ils arrivent à la détruire tant bien que mal (surtout que, rappelons-le, le héros est toujours un chat). Ils entrent ensuite dans le donjon, mais n'ont aucune idée de l'endroit précis où se trouve l'objet. Ils visitent le donjon, résolvent quelques énigmes pour ouvrir un passage secret. Ce passage contient des escaliers qui descendent au fond du donjon. Ils arrivent ensuite dans une salle où se trouve l'objet qu'ils recherchent. (Un boss à combattre)
+
+END
+
+Système de case pour déplacer le personnage (moins de problèmes de mémoire). Déplacer le personnage prend plusieurs tours de boucle.
+

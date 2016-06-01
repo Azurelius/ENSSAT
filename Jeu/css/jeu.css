@@ -1,0 +1,22 @@
+canvas{
+	position: absolute;
+	height:500px;
+	width: 500px;
+}
+
+canvas#background{
+	z-index: 5;
+}
+
+canvas#players{
+	z-index: 7;
+}
+
+canvas#puzzle{
+	z-index: 6;
+}
+
+p{
+	position: absolute;
+	top: 500px;
+}
