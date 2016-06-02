@@ -1,20 +1,20 @@
-var hitbox;
+/*Définition des variables globales*/
 
-var puzzle;
+var hitbox; //matrice de cases infranchissables
 
-var Case = function(x,y){
+var Case = function(x,y){ //case de la matrice puzzle
 	this.x = x;
 	this.y = y;
 	this.chatParcours = false;
 }
 
-var caseADessiner;
+var caseADessiner; //prochaines cases à dessiner
 
-var decor;
-var compteur;
-var victoire;
+var decor; //background
+var compteur; //compteur qui s'incrément à chaque passage de animFrame
+var victoire; //boolean de victoir
 
-var Cat = function(){
+var Cat = function(){ //objet du personnage
 	//position de l'objet
 	this.x = 0;
 	this.y = 0;
@@ -33,11 +33,11 @@ var Cat = function(){
 	this.img = './img/cat.png';
 }
 
-var monChat;
+var monChat; //variable du chat
 
-var direction;
+var direction; //tableau des entrées utilisateur
 
-function generation(){
+var generation = function(){ //fonction qui génère l'état initial du jeu
 	hitbox = [
 	[0,0, 0, 0, 0,0, 0, 0, 0,0],
 	[0,1, 0, 0, 0,0, 0, 0, 0,0],
@@ -199,6 +199,7 @@ var userEvent = function() {
 			      // Do something for "esc" key press.
 					break;
 				case "r":
+				//Permet de recommencer le jeu
 					generation();
 					break;
 				default:
@@ -212,17 +213,19 @@ var userEvent = function() {
 
 var updateGame = function(){
 	var dir = direction.pop();
+	//si une direction a été rentrée par l'utilisateur
 	if(dir!=null){
 		if(monChat.dir==null){
 			monChat.dir = dir;
 		}
 	}
-	deplacerChat();
+	deplacerChat(); //on déplace le chat
 	
 	//Condition de victoire
 	var i = 0;
 	var j = 0;
 	var trouve = false;
+	//Si toutes les cases ont été parcourues, alors c'est gagné
 	while(i<decor.length&&!trouve){
 		j = 0;
 		while(j<decor.length&&!trouve){
@@ -242,6 +245,7 @@ var updateGame = function(){
 
 };
 
+//Permet d'éclairer une case sur laquelle le joueur est passé
 var modifierCase = function(x,y){
 	if(decor[x][y].chatParcours){
 		decor[x][y].x = 4;
@@ -252,6 +256,8 @@ var modifierCase = function(x,y){
 	}
 };
 
+//Permet de déplacer le chat selon certaines conditions : si la case où il veut aller n'est pas remplie ou si il n'essaie pas d'aller en dehors
+//du plateau. Les cases parcourues sont modifiées en fonction de si elles étaient déjà parcourues ou non.
 var deplacerChat = function(){
 	if(monChat.dir!=null){
 		//vitesse de deplacement
@@ -358,13 +364,13 @@ var drawGame = function(){
 			var ctx = document.getElementById('players').getContext('2d');
 			//On efface le canvas
 			ctx.clearRect(0, 0, 500, 500);
-			//On affiche la ieme partie du sprite pour l'animation
+			//On affiche le sprite correspondant à la position du chat et sa direction
 			ctx.drawImage(img,monChat.dirX*32,monChat.dirY*32,32,32,(monChat.x*32),(monChat.y*32),32,32);
 		},false);
 		img.src = monChat.img;
 
 		var img2 = new Image();
-
+		//On dessine toutes les cases qui ont été modifiées au dernier passage
 		img2.addEventListener("load",function(){
 			var ctx = document.getElementById('background').getContext('2d');
 			var it = caseADessiner.pop();
@@ -377,7 +383,7 @@ var drawGame = function(){
 		},false);
 
 		img2.src = './img/puzzle.png';
-	} else {
+	} else { //En cas de victoire, on efface tout et on affiche une image de victoire
 		var img = new Image();
 		img.addEventListener("load",function(){
 			var ctx = document.getElementById('players').getContext('2d');
@@ -392,10 +398,6 @@ var drawGame = function(){
 		
 	}
 };
-
-var drawEcranVictoire = function(){
-
-}
 
 var animFrame = window.requestAnimationFrame ||
 	window.webkitRequestAnimationFrame ||
